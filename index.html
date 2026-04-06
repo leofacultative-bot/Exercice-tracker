@@ -312,6 +312,81 @@ h1 span{color:var(--accent);}
 .explain-quality-dot.ok{background:var(--yellow);}
 .explain-quality-dot.struggle{background:var(--red);}
 
+/* ── CHALLENGES ── */
+--orange:#E8541A;
+.ch-section{margin-top:40px;border-top:1px solid var(--border);padding-top:32px;}
+.ch-add-grid{display:grid;grid-template-columns:1.8fr 1fr 90px auto;gap:8px;margin-bottom:24px;}
+.ch-global-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px;}
+.ch-gstat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;position:relative;overflow:hidden;}
+.ch-gstat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:#E8541A;}
+.ch-gstat.done-stat::before{background:var(--green);}
+.ch-gstat.reps-stat::before{background:var(--cyan);}
+.ch-gstat-label{font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:4px;}
+.ch-gstat-num{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;color:#E8541A;}
+.ch-gstat.done-stat .ch-gstat-num{color:var(--green);}
+.ch-gstat.reps-stat .ch-gstat-num{color:var(--cyan);}
+.ch-list{display:flex;flex-direction:column;gap:10px;}
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden;animation:slideIn .22s ease;}
+.ch-card:hover{border-color:var(--border2);}
+.ch-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.ch-card.ch-solo::before{background:#E8541A;}
+.ch-card.ch-group::before{background:var(--accent);}
+.ch-card.ch-done::before{background:var(--green);}
+.ch-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:12px;}
+.ch-left{flex:1;}
+.ch-name{font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#EEF0FF;margin-bottom:4px;}
+.ch-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.ch-type-badge{font-size:8px;letter-spacing:2px;padding:2px 7px;border-radius:10px;border:1px solid;}
+.ch-type-badge.solo{color:#E8541A;border-color:rgba(232,84,26,.3);background:rgba(232,84,26,.07);}
+.ch-type-badge.group{color:var(--accent);border-color:rgba(59,107,245,.3);background:rgba(59,107,245,.07);}
+.ch-type-badge.done{color:var(--green);border-color:rgba(30,191,122,.3);background:rgba(30,191,122,.07);}
+.ch-unit-label{font-size:9px;color:var(--muted);letter-spacing:1px;}
+.ch-right{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.ch-pct{font-family:'Bebas Neue',sans-serif;font-size:34px;line-height:1;color:#E8541A;}
+.ch-card.ch-group .ch-pct{color:var(--accent);}
+.ch-card.ch-done .ch-pct{color:var(--green);}
+.ch-progress-bg{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin-bottom:6px;}
+.ch-progress-fill{height:100%;border-radius:3px;background:#E8541A;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.ch-card.ch-group .ch-progress-fill{background:var(--accent);}
+.ch-card.ch-done .ch-progress-fill{background:var(--green);}
+.ch-progress-nums{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.ch-prog-current{font-size:11px;color:var(--text);}
+.ch-prog-goal{font-size:9px;color:var(--muted);letter-spacing:1px;}
+.ch-log-row{display:flex;align-items:center;gap:8px;border-top:1px solid var(--border);padding-top:10px;}
+.ch-log-input{background:#0A0C15;border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:6px 10px;outline:none;width:90px;transition:border-color .2s;}
+.ch-log-input:focus{border-color:#E8541A;}
+.ch-log-label{font-size:10px;color:var(--muted);}
+.btn-ch-log{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;padding:6px 14px;border-radius:6px;border:1px solid rgba(232,84,26,.35);background:rgba(232,84,26,.1);color:#E8541A;cursor:pointer;transition:all .15s;}
+.btn-ch-log:hover{background:rgba(232,84,26,.22);}
+.ch-card.ch-group .ch-log-input:focus{border-color:var(--accent);}
+.ch-card.ch-group .btn-ch-log{border-color:rgba(59,107,245,.35);background:rgba(59,107,245,.1);color:var(--accent);}
+.ch-card.ch-group .btn-ch-log:hover{background:rgba(59,107,245,.22);}
+.ch-leaderboard{border-top:1px solid var(--border);padding-top:10px;margin-top:10px;}
+.ch-lb-title{font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;}
+.ch-lb-row{display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(28,32,53,.5);}
+.ch-lb-row:last-child{border-bottom:none;}
+.ch-lb-rank{font-family:'Bebas Neue',sans-serif;font-size:18px;width:20px;text-align:center;color:var(--muted);}
+.ch-lb-rank.r1{color:var(--yellow);}
+.ch-lb-rank.r2{color:#9EA3B8;}
+.ch-lb-rank.r3{color:#CD7F32;}
+.ch-lb-avatar{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:rgba(59,107,245,.18);color:var(--accent);}
+.ch-lb-avatar.me{background:rgba(46,196,214,.18);color:var(--cyan);}
+.ch-lb-name{flex:1;font-size:11px;color:var(--text);}
+.ch-lb-name.me{color:var(--cyan);}
+.ch-lb-bar-wrap{width:100px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+.ch-lb-bar{height:100%;border-radius:2px;background:#E8541A;}
+.ch-lb-bar.me{background:var(--cyan);}
+.ch-lb-val{font-family:'Bebas Neue',sans-serif;font-size:16px;width:50px;text-align:right;color:var(--text);}
+.ch-lb-val.me{color:var(--cyan);}
+.btn-ch-del{background:none;border:none;cursor:pointer;color:var(--muted);font-size:13px;padding:4px 6px;border-radius:4px;transition:color .15s;}
+.btn-ch-del:hover{color:var(--red);}
+.ch-add-member-row{display:flex;gap:6px;margin-top:8px;}
+@media(max-width:640px){
+  .ch-add-grid{grid-template-columns:1fr 1fr!important;}
+  .ch-add-grid button{grid-column:1/-1;}
+  .ch-global-stats{grid-template-columns:1fr 1fr 1fr;}
+}
+
 /* ── MOBILE ── */
 @media(max-width:640px){
   .wrap{padding:0 12px 60px;}
@@ -434,6 +509,38 @@ h1 span{color:var(--accent);}
     <button class="btn btn-ghost" id="syncBtn" onclick="manualSync()" style="color:var(--cyan);border-color:rgba(46,196,214,.3)">☁ Sync vers cloud</button>
     <button class="btn btn-ghost" onclick="confirmReset()">↺ Tout réinitialiser</button>
   </div>
+
+  <!-- ══ CHALLENGES SECTION ══ -->
+  <div class="ch-section">
+    <div class="section-label" style="margin-bottom:16px">DÉFIS</div>
+
+    <div class="ch-global-stats">
+      <div class="ch-gstat"><div class="ch-gstat-label">DÉFIS ACTIFS</div><div class="ch-gstat-num" id="ch-stat-active">0</div></div>
+      <div class="ch-gstat done-stat"><div class="ch-gstat-label">COMPLÉTÉS</div><div class="ch-gstat-num" id="ch-stat-done">0</div></div>
+      <div class="ch-gstat reps-stat"><div class="ch-gstat-label">TOTAL LOGGÉ</div><div class="ch-gstat-num" id="ch-stat-total">0</div></div>
+    </div>
+
+    <div class="section-label" style="margin-bottom:10px">NOUVEAU DÉFI</div>
+    <div class="ch-add-grid">
+      <input class="add-input" id="ch-name-input" type="text" placeholder="Nom du défi (ex: Pushups Challenge)" />
+      <input class="add-input" id="ch-goal-input" type="number" placeholder="Objectif (ex: 7417)" min="1" />
+      <select class="add-input" id="ch-unit-input" style="appearance:none;-webkit-appearance:none;cursor:pointer">
+        <option value="reps">reps</option>
+        <option value="km">km</option>
+        <option value="min">min</option>
+        <option value="sessions">sessions</option>
+        <option value="pages">pages</option>
+        <option value="sets">sets</option>
+      </select>
+      <button class="btn btn-accent" onclick="addChallenge()">+ AJOUTER</button>
+    </div>
+
+    <div class="section-label" style="margin-bottom:12px">MES DÉFIS</div>
+    <div class="ch-list" id="ch-list">
+      <div class="empty" id="ch-empty"><div class="empty-icon">🏆</div>Ajoute ton premier défi pour commencer.</div>
+    </div>
+  </div>
+
 </div>
 
 <!-- MODAL -->
@@ -551,6 +658,7 @@ function showApp() {
   renderChip();
   renderTagFilter();
   renderFiltered();
+  renderChallenges();
 }
 
 function renderGoogleBtn() {
@@ -618,11 +726,11 @@ function normalizeState(s) {
   s.topics.forEach(t => {
     if (!t.log) t.log = { basics:[], apply:[], tricky:[], explain:[] };
     ['basics','apply','tricky'].forEach(k => { if (!t.log[k]) t.log[k] = []; });
-    // ── NEW: ensure explain array exists ──
     if (!t.log.explain) t.log.explain = [];
     if (!t.tags) t.tags = [];
     if (!t.reinforce) t.reinforce = [];
   });
+  if (!s.challenges) s.challenges = [];
   return s;
 }
 
@@ -1005,8 +1113,8 @@ function renderTagFilter() {
 function confirmReset() {
   if(!confirm('Réinitialiser tout ? Irréversible.')) return;
   if(modal.open) closeModal();
-  state={topics:[]};activeTag=null;
-  save();renderTagFilter();renderFiltered();
+  state={topics:[],challenges:[]};activeTag=null;
+  save();renderTagFilter();renderFiltered();renderChallenges();
 }
 
 function fmt(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),ss=s%60;return h>0?h+':'+pad(m)+':'+pad(ss):pad(m)+':'+pad(ss);}
@@ -1332,6 +1440,206 @@ async function manualSync() {
   btn.textContent = '☁ Sync vers cloud';
   btn.disabled = false;
 }
+
+// ══ CHALLENGES ══════════════════════════════════════
+// challenges are stored in state.challenges = []
+// each: { id, name, goal, unit, myProgress, members:[], done }
+
+function normalizeChallenges() {
+  if (!state.challenges) state.challenges = [];
+}
+
+function addChallenge() {
+  normalizeChallenges();
+  const nameEl = document.getElementById('ch-name-input');
+  const goalEl = document.getElementById('ch-goal-input');
+  const unitEl = document.getElementById('ch-unit-input');
+  const name = nameEl.value.trim();
+  const goal = parseInt(goalEl.value);
+  const unit = unitEl.value;
+  if (!name) { flash(nameEl); return; }
+  if (!goal || goal < 1) { flash(goalEl); return; }
+  state.challenges.push({
+    id: Date.now(), name: name.toUpperCase(), goal, unit,
+    myProgress: 0, members: [], done: false
+  });
+  nameEl.value = ''; goalEl.value = '';
+  save(); renderChallenges();
+}
+
+function logChallengeProgress(id) {
+  normalizeChallenges();
+  const inp = document.getElementById('ch-log-' + id);
+  const val = parseFloat(inp.value);
+  if (!val || val <= 0) { inp.style.borderColor='var(--red)'; setTimeout(()=>inp.style.borderColor='',600); return; }
+  const ch = state.challenges.find(c => c.id === id);
+  if (!ch) return;
+  ch.myProgress = Math.min(ch.goal, Math.round((ch.myProgress + val) * 100) / 100);
+  if (ch.myProgress >= ch.goal) ch.done = true;
+  inp.value = '';
+  save(); renderChallenges();
+  showToast('+' + val + ' ' + ch.unit + ' enregistré ✓');
+}
+
+function addChallengeMember(id) {
+  const inp = document.getElementById('ch-member-' + id);
+  const name = inp.value.trim();
+  if (!name) return;
+  const ch = state.challenges.find(c => c.id === id);
+  if (!ch) return;
+  if (!ch.members) ch.members = [];
+  ch.members.push({ name, val: 0 });
+  inp.value = '';
+  save(); renderChallenges();
+}
+
+function logMemberProgress(chId, memberIdx) {
+  const inp = document.getElementById('ch-mlog-' + chId + '-' + memberIdx);
+  const val = parseFloat(inp.value);
+  if (!val || val <= 0) return;
+  const ch = state.challenges.find(c => c.id === chId);
+  if (!ch || !ch.members[memberIdx]) return;
+  ch.members[memberIdx].val = Math.round((ch.members[memberIdx].val + val) * 100) / 100;
+  inp.value = '';
+  save(); renderChallenges();
+}
+
+function deleteChallenge(id) {
+  state.challenges = state.challenges.filter(c => c.id !== id);
+  save(); renderChallenges();
+}
+
+function resetChallengeProgress(id) {
+  const ch = state.challenges.find(c => c.id === id);
+  if (!ch || !confirm('Remettre la progression à zéro ?')) return;
+  ch.myProgress = 0; ch.done = false;
+  if (ch.members) ch.members.forEach(m => m.val = 0);
+  save(); renderChallenges();
+}
+
+function renderChallenges() {
+  normalizeChallenges();
+  const list = document.getElementById('ch-list');
+  const empty = document.getElementById('ch-empty');
+  if (state.challenges.length === 0) { empty.style.display='block'; list.querySelectorAll('.ch-card').forEach(e=>e.remove()); renderChallengeStats(); return; }
+  empty.style.display = 'none';
+
+  // Remove cards that no longer exist
+  list.querySelectorAll('.ch-card').forEach(el => {
+    if (!state.challenges.find(c => c.id == el.dataset.chid)) el.remove();
+  });
+
+  state.challenges.forEach(ch => {
+    const html = challengeCardHTML(ch);
+    const ex = list.querySelector('[data-chid="' + ch.id + '"]');
+    if (ex) { ex.innerHTML = html; ex.className = 'ch-card ' + challengeClass(ch); }
+    else {
+      const el = document.createElement('div');
+      el.className = 'ch-card ' + challengeClass(ch);
+      el.dataset.chid = ch.id;
+      el.innerHTML = html;
+      list.appendChild(el);
+    }
+  });
+  renderChallengeStats();
+}
+
+function challengeClass(ch) {
+  if (ch.done) return 'ch-done';
+  return ch.members && ch.members.length > 0 ? 'ch-group' : 'ch-solo';
+}
+
+function challengeCardHTML(ch) {
+  const pct = ch.goal > 0 ? Math.min(100, Math.round((ch.myProgress / ch.goal) * 100)) : 0;
+  const hasMembers = ch.members && ch.members.length > 0;
+
+  // Build leaderboard if group challenge
+  let lbHTML = '';
+  if (hasMembers) {
+    const allParticipants = [{ name: 'Moi', val: ch.myProgress, me: true }, ...ch.members];
+    allParticipants.sort((a, b) => b.val - a.val);
+    const maxVal = allParticipants[0]?.val || 1;
+    const rankClasses = ['r1', 'r2', 'r3'];
+    const rows = allParticipants.map((p, i) => {
+      const barPct = maxVal > 0 ? Math.round((p.val / maxVal) * 100) : 0;
+      const initials = p.name.slice(0, 2).toUpperCase();
+      return `<div class="ch-lb-row">
+        <div class="ch-lb-rank ${rankClasses[i] || ''}">${i + 1}</div>
+        <div class="ch-lb-avatar ${p.me ? 'me' : ''}">${initials}</div>
+        <div class="ch-lb-name ${p.me ? 'me' : ''}">${esc(p.name)}</div>
+        <div class="ch-lb-bar-wrap"><div class="ch-lb-bar ${p.me ? 'me' : ''}" style="width:${barPct}%"></div></div>
+        <div class="ch-lb-val ${p.me ? 'me' : ''}">${p.val}</div>
+      </div>`;
+    }).join('');
+    // Member log inputs
+    const memberInputs = ch.members.map((m, i) => `
+      <div style="display:flex;align-items:center;gap:6px;margin-top:4px">
+        <div style="font-size:10px;color:var(--muted);width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(m.name)}</div>
+        <input class="ch-log-input" id="ch-mlog-${ch.id}-${i}" type="number" placeholder="+" min="0" style="width:70px"
+          onkeydown="if(event.key==='Enter')logMemberProgress(${ch.id},${i})" />
+        <button class="btn-ch-log" onclick="logMemberProgress(${ch.id},${i})">+ LOG</button>
+      </div>`).join('');
+
+    lbHTML = `<div class="ch-leaderboard">
+      <div class="ch-lb-title">${allParticipants.length} WARRIORS</div>
+      ${rows}
+      <div class="ch-add-member-row">
+        <input class="add-input" id="ch-member-${ch.id}" type="text" placeholder="Ajouter un membre..." style="font-size:11px;padding:7px 10px" onkeydown="if(event.key==='Enter')addChallengeMember(${ch.id})" />
+        <button class="btn btn-ghost" onclick="addChallengeMember(${ch.id})" style="font-size:10px;padding:7px 12px">+ MEMBRE</button>
+      </div>
+      ${memberInputs ? '<div style="margin-top:6px">'+memberInputs+'</div>' : ''}
+    </div>`;
+  }
+
+  const typeLabel = ch.done ? 'COMPLÉTÉ' : (hasMembers ? 'GROUPE' : 'SOLO');
+  const typeClass = ch.done ? 'done' : (hasMembers ? 'group' : 'solo');
+
+  return `
+    <div class="ch-header">
+      <div class="ch-left">
+        <div class="ch-name">${esc(ch.name)}</div>
+        <div class="ch-meta">
+          <span class="ch-type-badge ${typeClass}">${typeLabel}</span>
+          <span class="ch-unit-label">OBJECTIF : ${ch.goal} ${esc(ch.unit)}</span>
+        </div>
+      </div>
+      <div class="ch-right">
+        <div class="ch-pct">${pct}%</div>
+        <button class="btn-ch-del" onclick="deleteChallenge(${ch.id})" title="Supprimer">✕</button>
+      </div>
+    </div>
+    <div class="ch-progress-bg"><div class="ch-progress-fill" style="width:${pct}%"></div></div>
+    <div class="ch-progress-nums">
+      <span class="ch-prog-current">${ch.myProgress} / ${ch.goal} ${esc(ch.unit)}</span>
+      <span class="ch-prog-goal">${ch.done ? '✓ COMPLÉTÉ' : (ch.goal - ch.myProgress) + ' ' + esc(ch.unit) + ' restants'}</span>
+    </div>
+    ${!ch.done ? `<div class="ch-log-row">
+      <input class="ch-log-input" id="ch-log-${ch.id}" type="number" placeholder="+" min="0"
+        onkeydown="if(event.key==='Enter')logChallengeProgress(${ch.id})" />
+      <span class="ch-log-label">${esc(ch.unit)}</span>
+      <button class="btn-ch-log" onclick="logChallengeProgress(${ch.id})">+ LOG</button>
+      ${!hasMembers ? `<button class="btn btn-ghost" onclick="addChallengeMember(${ch.id})" style="font-size:9px;padding:5px 10px;margin-left:auto">+ MEMBRE</button>` : ''}
+      <button class="btn-ch-del" onclick="resetChallengeProgress(${ch.id})" title="Reset" style="margin-left:${hasMembers?'auto':''};font-size:10px;color:var(--muted)">↺</button>
+    </div>` : `<div style="text-align:center;padding:8px 0;font-size:10px;color:var(--green);letter-spacing:2px">★ DÉFI COMPLÉTÉ ★ <button class="btn-ch-del" onclick="resetChallengeProgress(${ch.id})" style="font-size:10px;color:var(--muted)">↺ Rejouer</button></div>`}
+    ${!hasMembers && !ch.done ? `<div class="ch-add-member-row" id="ch-member-wrap-${ch.id}" style="display:none">
+      <input class="add-input" id="ch-member-${ch.id}" type="text" placeholder="Nom du membre..." style="font-size:11px;padding:7px 10px" onkeydown="if(event.key==='Enter')addChallengeMember(${ch.id})" />
+      <button class="btn btn-ghost" onclick="addChallengeMember(${ch.id})" style="font-size:10px;padding:7px 12px">+ MEMBRE</button>
+    </div>` : ''}
+    ${lbHTML}`;
+}
+
+function renderChallengeStats() {
+  normalizeChallenges();
+  const active = state.challenges.filter(c => !c.done).length;
+  const done   = state.challenges.filter(c => c.done).length;
+  const total  = state.challenges.reduce((a, c) => a + c.myProgress, 0);
+  document.getElementById('ch-stat-active').textContent = active;
+  document.getElementById('ch-stat-done').textContent   = done;
+  document.getElementById('ch-stat-total').textContent  = total % 1 === 0 ? total : total.toFixed(1);
+}
+
+document.getElementById('ch-name-input').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('ch-goal-input').focus(); });
+document.getElementById('ch-goal-input').addEventListener('keydown', e => { if (e.key === 'Enter') addChallenge(); });
 
 // ══ BOOT ══════════════════════════════════════════
 initAuth();
