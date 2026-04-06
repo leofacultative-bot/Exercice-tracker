@@ -1464,13 +1464,49 @@ function normalizeChallenges() {
 
 // Live progress: if linked to a topic/type, read from log; else use stored myProgress
 function getChallengeLiveProgress(ch) {
-  if (!ch.linkedTopicId) return ch.myProgress;
-  const t = state.topics.find(t => t.id === ch.linkedTopicId);
-  if (!t) return ch.myProgress;
-  const types = ch.linkedType === 'all'
+  if (!ch.linkedTopicId && !ch.linkedAllTopics) return ch.myProgress;
+  const types = (!ch.linkedType || ch.linkedType === 'all')
     ? ['basics','apply','tricky','explain']
     : [ch.linkedType];
+  if (ch.linkedAllTopics) {
+    // Count across all topics
+    return state.topics.reduce((total, t) => {
+      return total + types.reduce((a, k) => a + (t.log[k] ? t.log[k].length : 0), 0);
+    }, 0);
+  }
+  const t = state.topics.find(t => t.id === ch.linkedTopicId);
+  if (!t) return ch.myProgress;
   return types.reduce((a, k) => a + (t.log[k] ? t.log[k].length : 0), 0);
+}
+
+function toggleLinkPanel(id) {
+  const panel = document.getElementById('ch-link-panel-' + id);
+  if (panel) panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+
+function applyLinkChallenge(id) {
+  normalizeChallenges();
+  const ch = state.challenges.find(c => c.id === id);
+  if (!ch) return;
+  const topicSel = document.getElementById('ch-lp-topic-' + id);
+  const typeSel  = document.getElementById('ch-lp-type-' + id);
+  const topicVal = topicSel ? topicSel.value : '';
+  const typeVal  = typeSel  ? typeSel.value  : 'all';
+  if (topicVal) {
+    ch.linkedTopicId  = parseInt(topicVal);
+    ch.linkedType     = typeVal;
+    ch.linkedAllTopics = false;
+  } else {
+    // Link to ALL topics
+    ch.linkedTopicId  = null;
+    ch.linkedType     = typeVal;
+    ch.linkedAllTopics = true;
+  }
+  // Recompute done state
+  const live = getChallengeLiveProgress(ch);
+  if (live >= ch.goal) ch.done = true;
+  save(); renderChallenges();
+  showToast('Défi lié ✓ — progression mise à jour !');
 }
 
 function onChUnitChange() {
@@ -1589,7 +1625,7 @@ function renderChallenges() {
   state.challenges.forEach(ch => {
     const live = getChallengeLiveProgress(ch);
     // auto-complete if linked and goal reached
-    if (ch.linkedTopicId && live >= ch.goal && !ch.done) { ch.done = true; }
+    if ((ch.linkedTopicId || ch.linkedAllTopics) && live >= ch.goal && !ch.done) { ch.done = true; }
     const html = challengeCardHTML(ch, live);
     const ex = list.querySelector('[data-chid="' + ch.id + '"]');
     if (ex) { ex.innerHTML = html; ex.className = 'ch-card ' + challengeClass(ch); }
@@ -1613,14 +1649,16 @@ function challengeCardHTML(ch, liveProgress) {
   const progress = liveProgress !== undefined ? liveProgress : getChallengeLiveProgress(ch);
   const pct = ch.goal > 0 ? Math.min(100, Math.round((progress / ch.goal) * 100)) : 0;
   const hasMembers = ch.members && ch.members.length > 0;
-  const isLinked   = !!ch.linkedTopicId;
+  const isLinked   = !!ch.linkedTopicId || !!ch.linkedAllTopics;
 
   // Linked topic info badge
   let linkedBadge = '';
   if (isLinked) {
-    const t = state.topics.find(t => t.id === ch.linkedTopicId);
-    const tName = t ? t.name : '—';
-    const typeLabel = ch.linkedType === 'all' ? 'tous types' : ch.linkedType;
+    const tName = ch.linkedAllTopics ? 'Tous les concepts' : (() => {
+      const t = state.topics.find(t => t.id === ch.linkedTopicId);
+      return t ? t.name : '—';
+    })();
+    const typeLabel = (!ch.linkedType || ch.linkedType === 'all') ? 'tous types' : ch.linkedType;
     linkedBadge = `<span style="font-size:8px;letter-spacing:1px;padding:2px 8px;border-radius:10px;border:1px solid rgba(46,196,214,.3);background:rgba(46,196,214,.07);color:var(--cyan)">🔗 ${esc(tName)} · ${typeLabel}</span>`;
   }
 
@@ -1675,7 +1713,26 @@ function challengeCardHTML(ch, liveProgress) {
         <span class="ch-log-label">${esc(ch.unit)}</span>
         <button class="btn-ch-log" onclick="logChallengeProgress(${ch.id})">+ LOG</button>
         ${!hasMembers ? `<button class="btn btn-ghost" onclick="addChallengeMember(${ch.id})" style="font-size:9px;padding:5px 10px;margin-left:auto">+ MEMBRE</button>` : ''}
-        <button class="btn-ch-del" onclick="resetChallengeProgress(${ch.id})" title="Reset" style="margin-left:${hasMembers?'auto':''};font-size:10px;color:var(--muted)">↺</button>
+        <button class="btn btn-ghost" onclick="toggleLinkPanel(${ch.id})" style="font-size:9px;padding:5px 10px;${!hasMembers?'':'margin-left:auto;'}color:var(--cyan);border-color:rgba(46,196,214,.3)">🔗 LIER</button>
+        <button class="btn-ch-del" onclick="resetChallengeProgress(${ch.id})" title="Reset" style="font-size:10px;color:var(--muted)">↺</button>
+      </div>
+      <div id="ch-link-panel-${ch.id}" style="display:none;margin-top:8px;padding:10px 12px;background:rgba(46,196,214,.05);border:1px solid rgba(46,196,214,.2);border-radius:8px">
+        <div style="font-size:9px;letter-spacing:2px;color:var(--cyan);margin-bottom:8px">LIER CE DÉFI À UN CONCEPT</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center">
+          <select class="add-input" id="ch-lp-topic-${ch.id}" style="appearance:none;-webkit-appearance:none;cursor:pointer;font-size:11px;padding:7px 10px">
+            <option value="">— Tous les concepts —</option>
+            ${state.topics.map(t => `<option value="${t.id}">${esc(t.name)}</option>`).join('')}
+          </select>
+          <select class="add-input" id="ch-lp-type-${ch.id}" style="appearance:none;-webkit-appearance:none;cursor:pointer;font-size:11px;padding:7px 10px">
+            <option value="all">Tous types</option>
+            <option value="basics">Basics</option>
+            <option value="apply">Application</option>
+            <option value="tricky">Tricky</option>
+            <option value="explain">Explain</option>
+          </select>
+          <button class="btn-ch-log" onclick="applyLinkChallenge(${ch.id})">✓ LIER</button>
+        </div>
+        <div style="font-size:9px;color:var(--muted);margin-top:6px">La progression sera calculée automatiquement depuis ton journal d'exercices.</div>
       </div>`;
 
   return `
